@@ -11,3 +11,13 @@ select ANIMAL_ID, NAME,
 if(SEX_UPON_INTAKE like '%Neutered%' or
 SEX_UPON_INTAKE like '%Spayed%', 'O', 'X') as 중성화
 from ANIMAL_INS order by ANIMAL_ID;
+
+# 오랜 기간 보호한 동물(2)
+select o.ANIMAL_ID, o.NAME from ANIMAL_OUTS as o
+join ANIMAL_INS as i on o.ANIMAL_ID=i.ANIMAL_ID
+order by o.DATETIME-i.DATETIME desc
+limit 2;
+
+# DATETIME에서 DATE로 형 변환
+select ANIMAL_ID, NAME, date_format (DATETIME, '%Y-%m-%d') as 날짜
+from ANIMAL_INS order by ANIMAL_ID;
