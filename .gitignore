@@ -9,3 +9,4 @@
 *.dSYM
 *.out
 tempCodeRunnerFile.cpp
+*_x.*
