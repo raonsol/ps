@@ -8,5 +8,6 @@
 .vscode
 *.dSYM
 *.out
-tempCodeRunnerFile.cpp
+tempCodeRunnerFile.*
 *_x.*
+main.*
