@@ -4,7 +4,8 @@ using namespace std;
 
 int ans = 10000000;
 
-void dfs(int w, int h, int cnt, vector<vector<bool>>& maze, vector<vector<bool>> visited) {
+void dfs(int w, int h, int cnt, vector<vector<bool>>& maze,
+         vector<vector<bool>> visited) {
     visited[h][w] = true;
     if (w + 1 == visited[0].size() && h + 1 == visited.size()) {
         if (ans > cnt) ans = cnt;
@@ -24,14 +25,17 @@ void dfs(int w, int h, int cnt, vector<vector<bool>>& maze, vector<vector<bool>>
 }
 
 int main() {
-    int n, m; cin >> n >> m;
+    int n, m;
+    cin >> n >> m;
     vector<vector<bool>> maze(n);
     string tmp;
     for (int i = 0; i < n; i++) {
         cin >> tmp;
         for (char c : tmp) {
-            if (c == '0') maze[i].push_back(false);
-            else maze[i].push_back(true);
+            if (c == '0')
+                maze[i].push_back(false);
+            else
+                maze[i].push_back(true);
         }
     }
 
