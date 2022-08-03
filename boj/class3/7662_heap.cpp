@@ -10,9 +10,10 @@ using namespace std;
   cout.tie(NULL);
 
 int main(int argc, char** argv) {
-#ifndef ONLINE_JUDGE
-  freopen("input.txt", "r", stdin);
-#endif
+  #ifndef ONLINE_JUDGE
+    freopen("input.txt", "r", stdin);
+  #endif
+  FAST_IO;
 
   int t;
   cin >> t;
@@ -53,6 +54,7 @@ int main(int argc, char** argv) {
         }
       }
     }
+    
     int min, max;
     bool isEmpty = false;
     if (min_q.empty() || max_q.empty()) {
