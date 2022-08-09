@@ -5,25 +5,25 @@ input = sys.stdin.readline
 
 n = int(input())
 ans = 0
-queens = []
+queenX = [0 for i in range(n)]
+
+
+def isAval(y, x):
+    for i in range(y):
+        if queenX[i] == x or abs(queenX[i] - x) == y - i:
+            return False
+    return True
 
 
 def dfs(depth):
     for x in range(n):
-        isAval = True
-        for q in queens:
-            if q["x"] == x or abs(q["x"] - x) == depth - q["y"]:
-                isAval = False
-                break
-
-        if isAval:
+        if isAval(depth, x):
             if depth == n - 1:
                 global ans
                 ans += 1
             else:
-                queens.append({"y": depth, "x": x})
+                queenX[depth] = x
                 dfs(depth + 1)
-                queens.pop()
 
 
 dfs(0)

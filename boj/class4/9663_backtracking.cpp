@@ -8,27 +8,29 @@ using namespace std;
   cout.tie(NULL);
 
 int ans = 0;
-vector<pair<int, int>> queens;
+vector<int> queenX;
+
+bool isAval(int y, int x) {
+  for (int i = 0; i < y; i++) {
+    if (queenX[i] == x || abs(queenX[i] - x) == y - i) {
+      return false;
+    }
+  }
+  return true;
+}
+
 void dfs(int depth, int n) {
   for (int x = 0; x < n; x++) {
-    bool isAval = true;
-    for (auto q : queens) {
-      if (q.second == x || abs(q.second - x) == depth - q.first) {
-        isAval = false;
-        break;
-      }
-    }
-    if (isAval) {
+    if (isAval(depth, x)) {
       if (depth == n - 1)
         ans++;
       else {
-        queens.emplace_back(depth, x);
+        queenX[depth] = x;
         dfs(depth + 1, n);
-        queens.pop_back();
       }
     }
   }
-}
+};
 
 int main(int argc, char** argv) {
 #ifndef ONLINE_JUDGE
@@ -37,7 +39,7 @@ int main(int argc, char** argv) {
   FAST_IO;
   int n;
   cin >> n;
-  vector<pair<int, int>> queens;
+  queenX.resize(n);
   dfs(0, n);
   cout << ans << endl;
 
