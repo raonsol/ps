@@ -3,16 +3,24 @@ const inputPath = process.platform === "linux" ? "/dev/stdin" : "./input.txt";
 
 let n = fs.readFileSync(inputPath).toString().trim();
 n = Number(n);
-memo = [[], [1]];
+let memo = [0, 1];
 for (let i = 2; i <= n; i++) {
-  let targetIdx = i - 1;
-  if (!(i % 3)) targetIdx = memo[targetIdx].length < memo[i / 3].length ? i - 1 : i / 3;
-  if (!(i % 2)) targetIdx = memo[targetIdx].length < memo[i / 2].length ? targetIdx : i / 2;
-  memo.push([i, ...memo[targetIdx]]);
+  memo[i] = memo[i - 1] + 1;
+  if (!(i % 3)) memo[i] = Math.min(memo[i], memo[i / 3] + 1);
+  if (!(i % 2)) memo[i] = Math.min(memo[i], memo[i / 2] + 1);
 }
 
-console.log(memo[n].length - 1);
-console.log(memo[n].join(" "));
+let i = n, ans = "";
+while (i !== 1) {
+  ans += `${i} `;
+  if (memo[i] === memo[i - 1] + 1) i -= 1;
+  else if (memo[i] === memo[i / 3] + 1) i /= 3;
+  else if (memo[i] === memo[i / 2] + 1) i /= 2;
+}
+ans += "1\n";
+
+console.log(memo[n] - 1);
+console.log(ans.trim());
 
 // 3으로 나누거나, 2로 나누거나, -1
 // 2부터 N까지 올라가며 dp배열 생성,
